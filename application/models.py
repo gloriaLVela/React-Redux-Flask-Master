@@ -1,4 +1,5 @@
-from index import db, bcrypt
+from index import db
+from .encryptI import encrypt_password, decrypt_password
 
 
 class User(db.Model):
@@ -9,16 +10,18 @@ class User(db.Model):
     def __init__(self, email, password):
         self.email = email
         self.active = True
-        self.password = User.hashed_password(password)
+        encrypted_password = encrypt_password(password)
+        self.password = encrypted_password
 
-    @staticmethod
-    def hashed_password(password):
-        return bcrypt.generate_password_hash(password).decode("utf-8")
+    # @staticmethod
+    # def hashed_password(password):
+    #     return bcrypt.generate_password_hash(password).decode("utf-8")
 
     @staticmethod
     def get_user_with_email_and_password(email, password):
         user = User.query.filter_by(email=email).first()
-        if user and bcrypt.check_password_hash(user.password, password):
+        if user:
+            print("password", decrypt_password(user.password))
             return user
         else:
             return None

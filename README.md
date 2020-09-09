@@ -26,7 +26,7 @@ $ export DATABASE_URL="mysql+mysqlconnector://username:password@localhost/mydata
 
 or
 
-$ export DATABASE_URL="sqlite:///your.db"
+$ export DATABASE_URL="sqlite:///sqlite.db"
 ```
 (More about connection strings in this [flask config guide](http://flask-sqlalchemy.pocoo.org/2.1/config/).)
 ```
