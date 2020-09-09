@@ -1,5 +1,5 @@
 from index import db
-from .encryptI import encrypt_password, decrypt_password
+from .encryptII import encrypt, decrypt
 
 
 class User(db.Model):
@@ -10,8 +10,8 @@ class User(db.Model):
     def __init__(self, email, password):
         self.email = email
         self.active = True
-        encrypted_password = encrypt_password(password)
-        self.password = encrypted_password
+        encrypted_password = encrypt("THis Key!",password)
+        self.password = password
 
     # @staticmethod
     # def hashed_password(password):
